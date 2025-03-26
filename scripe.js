@@ -2,11 +2,20 @@ let title = document.querySelector('.title');
 let squares = [];
 let turn = 'x';
 function pro(num1,num2,num3){
-    title.innerHTML = `${squares[num1]} Winner`
+    console.log(num1)
+    title.innerHTML = `${squares[num1]} Winner 🎉`
     document.getElementById('item'+num1).style.background = '#131112';
     document.getElementById('item'+num2).style.background = '#131112';
     document.getElementById('item'+num3).style.background = '#131112';
+    ReloadPage();
+}
 
+function MatchDraw(){
+    title.innerHTML = `Match Draw 🤝`
+    ReloadPage();
+}
+
+function ReloadPage(){
     setInterval(()=>{
         title.innerHTML += '.';
     },1000)
@@ -14,6 +23,8 @@ function pro(num1,num2,num3){
         location.reload();
     },4000)
 }
+
+
 function winner(){
     for(let i = 1 ; i < 10 ; i++){
         squares[i] = document.getElementById('item' + i).innerHTML;
@@ -54,6 +65,12 @@ function winner(){
     }else if(squares[3] == squares[5] && squares[5]== squares[7] && squares[3] != ""){
         pro(3,5,7);
     }
+
+    /* Check Draw */
+    if (squares.slice(1).every(item => item !== "")) {
+        MatchDraw();
+    }
+    
     
 }
 
